@@ -37,7 +37,7 @@ let crcTable: [UInt32] = [
 public func crc32(_ data: UnsafeRawBufferPointer, crcInit: UInt32 = 0) -> UInt32 {
 	var crc: UInt32 = crcInit ^ 0xffffffff
 	for b in data {
-		crc = ((crc >> 8) & 0x00ffffff) ^ crcTable[Int((UInt8(truncatingBitPattern: crc) ^ b) & 0xff)]
+		crc = ((crc >> 8) & 0x00ffffff) ^ crcTable[Int((UInt8(truncatingIfNeeded: crc) ^ b) & 0xff)]
 	}
 	return crc ^ 0xffffffff
 }
